@@ -3,7 +3,7 @@ Created on May 5, 2017
 
 @author: anthony
 '''
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import math
 import re
 from bs4 import BeautifulSoup
@@ -30,14 +30,14 @@ class GoogleSearch:
         total = None;
         for i in range(pages) :
             start = i * GoogleSearch.RESULTS_PER_PAGE
-            opener = urllib2.build_opener()
+            opener = urllib.request.build_opener()
             opener.addheaders = GoogleSearch.DEFAULT_HEADERS
-            response = opener.open(GoogleSearch.SEARCH_URL + "?q="+ urllib2.quote(query) + ("" if start == 0 else ("&start=" + str(start))))
+            response = opener.open(GoogleSearch.SEARCH_URL + "?q="+ urllib.parse.quote(query) + ("" if start == 0 else ("&start=" + str(start))))
             soup = BeautifulSoup(response.read(), "lxml")
             response.close()
             if total is None:
                 totalText = soup.select(GoogleSearch.TOTAL_SELECTOR)[0].children.next().encode('utf-8')
-                total = long(re.sub("[', ]", "", re.search("(([0-9]+[', ])*[0-9]+)", totalText).group(1)))
+                total = int(re.sub("[', ]", "", re.search("(([0-9]+[', ])*[0-9]+)", totalText).group(1)))
             results = self.parseResults(soup.select(GoogleSearch.RESULT_SELECTOR))
             if len(searchResults) + len(results) > num_results:
                 del results[num_results - len(searchResults):]
@@ -89,7 +89,7 @@ class SearchResult:
     
     def getMarkup(self):
         if self.__markup is None:
-            opener = urllib2.build_opener()
+            opener = urllib.request.build_opener()
             opener.addheaders = GoogleSearch.DEFAULT_HEADERS
             response = opener.open(self.url);
             self.__markup = response.read()
@@ -98,7 +98,7 @@ class SearchResult:
     def __str__(self):
         return  str(self.__dict__)
     def __unicode__(self):
-        return unicode(self.__str__())
+        return str(self.__str__())
     def __repr__(self):
         return self.__str__()
 
@@ -110,9 +110,9 @@ if __name__ == "__main__":
     if len(query) == 0:
         query = "python"
     count = 10
-    print ("Fetching first " + str(count) + " results for \"" + query + "\"...")
+    print(("Fetching first " + str(count) + " results for \"" + query + "\"..."))
     response = search.search(query, count)
-    print ("TOTAL: " + str(response.total) + " RESULTS")
+    print(("TOTAL: " + str(response.total) + " RESULTS"))
     for result in response.results:
-        print("RESULT #" +str (i) + ": "+ (result._SearchResult__text if result._SearchResult__text is not None else "[None]") + "\n\n")
+        print(("RESULT #" +str (i) + ": "+ (result._SearchResult__text if result._SearchResult__text is not None else "[None]") + "\n\n"))
         i+=1

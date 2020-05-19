@@ -55,8 +55,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'google-search'
-copyright = u"2017, Anthony Hseb"
+project = 'google-search'
+copyright = "2017, Anthony Hseb"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -209,8 +209,8 @@ latex_elements = {
 # [howto/manual]).
 latex_documents = [
     ('index', 'googlesearch.tex',
-     u'google-search Documentation',
-     u'Anthony Hseb', 'manual'),
+     'google-search Documentation',
+     'Anthony Hseb', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at
@@ -240,8 +240,8 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'googlesearch',
-     u'google-search Documentation',
-     [u'Anthony Hseb'], 1)
+     'google-search Documentation',
+     ['Anthony Hseb'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -255,8 +255,8 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'googlesearch',
-     u'google-search Documentation',
-     u'Anthony Hseb',
+     'google-search Documentation',
+     'Anthony Hseb',
      'googlesearch',
      'One line description of project.',
      'Miscellaneous'),
